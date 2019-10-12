@@ -1,5 +1,6 @@
 #include"SLLModule.h"
 #include<stdlib.h>
+#include<stdio.h>
 
 
 
@@ -58,4 +59,58 @@ extern NODE* DeleteElementInSLL(int index, NODE* headElementOfSLL){
 	}	
 	return newHead;
 
+}
+
+//this function depend on how DATA type is organized, in this case is for just one integer
+void PrintSSL(NODE* head) {
+	/*
+	if (head != CheckLoop(head)) {
+		printf("There is no tail in SLL");
+		return;
+	}
+	*/
+	printf("SSL from head to tail:\n");
+	NODE* currentNode = head;
+	while(currentNode != NULL){
+		printf("%d\t", currentNode->data.data);
+		currentNode = currentNode->nextNode;
+	}
+}
+
+NODE* CheckLoop(NODE* head) {
+	
+	int elementWasBefore = 0;//control variable, flag
+	NODE* currentNode = head;
+	NODE* controlNode;
+	int index = 0;
+	int i;
+	if (head->nextNode == NULL) {
+
+	}
+	else {
+		while (currentNode != NULL) {
+
+			//checking
+			controlNode = head;
+			//comparing with all node before
+			for (i = 0; i < index; i++) {
+				if (currentNode == controlNode) {
+					elementWasBefore = 1;
+				}
+				controlNode = controlNode->nextNode;
+			}
+
+			if (elementWasBefore == 0) {
+				currentNode = currentNode->nextNode;
+			}
+			else {
+				//return node whicih show element from behind 
+				return currentNode;
+			}
+			currentNode = currentNode->nextNode;
+			index++;
+		}
+	}
+	//if everything is OK
+	return head;
 }

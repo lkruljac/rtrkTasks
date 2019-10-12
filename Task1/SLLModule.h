@@ -22,3 +22,7 @@ NODE* AddElementInSLL(DATA elementToAdd, NODE* headElementOfSLL);
 //first(head) index is 0,
 //Function return head of edited SLL
 NODE* DeleteElementInSLL(int index, NODE* headElementOfSLL);
+
+void PrintSSL(NODE* head);
+
+NODE* CheckLoop(NODE* head);
