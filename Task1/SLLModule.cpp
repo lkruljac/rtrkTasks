@@ -4,7 +4,7 @@
 
 
 
-extern NODE* SSLInit(DATA firstElementData) {
+extern NODE* SLLInit(DATA firstElementData) {
 	NODE *newHeadNode;
 	newHeadNode = (NODE*)malloc(sizeof(NODE));
 	
@@ -62,19 +62,20 @@ extern NODE* DeleteElementInSLL(int index, NODE* headElementOfSLL){
 }
 
 //this function depend on how DATA type is organized, in this case is for just one integer
-void PrintSSL(NODE* head) {
+void PrintSLL(NODE* head) {
 	/*
 	if (head != CheckLoop(head)) {
 		printf("There is no tail in SLL");
 		return;
 	}
 	*/
-	printf("SSL from head to tail:\n");
+	printf("\nSLL from head to tail:\n");
 	NODE* currentNode = head;
 	while(currentNode != NULL){
 		printf("%d\t", currentNode->data.data);
 		currentNode = currentNode->nextNode;
 	}
+	printf("End of SLL");
 }
 
 NODE* CheckLoop(NODE* head) {
@@ -113,4 +114,15 @@ NODE* CheckLoop(NODE* head) {
 	}
 	//if everything is OK
 	return head;
+}
+
+NODE* DeleteSLL(NODE *head) {
+	NODE* current = head;
+	NODE* next;
+	while (current != NULL) {
+		next = current->nextNode;
+		free(current);
+		current = next;
+	}
+	return current;
 }

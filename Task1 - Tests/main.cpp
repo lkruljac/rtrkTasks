@@ -1,5 +1,6 @@
 #include"SLLModule.h"
 #include<stdio.h>
+#include<conio.h>
 
 int main() {
 	NODE *head;
@@ -7,25 +8,33 @@ int main() {
 	myFirstElement.data = 0;
 	
 	//Testing Init function
-	printf("Added first element: 1");
-	head = SSLInit(myFirstElement);
-	PrintSSL(head);
+	printf("Added first element: %d", myFirstElement.data);
+	head = SLLInit(myFirstElement);
+	PrintSLL(head);
 
 	//Testing AddElement function
 	int i;
-	DATA element;
+	DATA element;	
 	for (i = 1; i < 11; i++) {
 		element.data = i;
 		head = AddElementInSLL(element, head);
 	}
-	PrintSSL(head);
+	PrintSLL(head);
 
 	//Test DeleteElement function
 	int index = 3;
 	printf("\nDeleted element on index: %d", index);
 	head = DeleteElementInSLL(index, head);
-	PrintSSL(head);
+	PrintSLL(head);
 
+	//Test DeleteSLL function
+	printf("\nDeleted SSL");
+	head = DeleteSLL(head);
+	PrintSLL(head);
+
+
+	printf("\n###\n###\nUser press any key to exit...");
+	_getch();
 
 	return 0;
 }
