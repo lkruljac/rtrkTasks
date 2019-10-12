@@ -5,9 +5,9 @@
 
 
 NODE* SLLInit(DATA firstElementData) {
-	NODE *newHeadNode;
+	NODE* newHeadNode;
 	newHeadNode = (NODE*)malloc(sizeof(NODE));
-	
+
 	//writing data of first element
 	newHeadNode->data = firstElementData;
 
@@ -18,9 +18,9 @@ NODE* SLLInit(DATA firstElementData) {
 
 
 NODE* AddElementInSLL(DATA elementToAdd, NODE* headElementOfSLL) {
-	NODE *newNode;
+	NODE* newNode;
 	newNode = (NODE*)malloc(sizeof(NODE));
-	
+
 	//there is 2 possibility:
 	//1) New NODE is nextElement of last added NODE
 	//2) New NODE nextElement is last added NODE
@@ -34,7 +34,7 @@ NODE* AddElementInSLL(DATA elementToAdd, NODE* headElementOfSLL) {
 
 }
 
-NODE* DeleteElementInSLL(int index, NODE* headElementOfSLL){
+ NODE* DeleteElementInSLL(int index, NODE* headElementOfSLL) {
 
 	NODE* newHead = headElementOfSLL;
 	if (index == 0) {
@@ -44,7 +44,7 @@ NODE* DeleteElementInSLL(int index, NODE* headElementOfSLL){
 	}
 	else {
 		int i;
-		NODE *oneBeforeTargetNode = headElementOfSLL;
+		NODE* oneBeforeTargetNode = headElementOfSLL;
 		for (i = 0; i < index - 1; i++) {
 			oneBeforeTargetNode = oneBeforeTargetNode->nextNode;
 		}
@@ -55,8 +55,8 @@ NODE* DeleteElementInSLL(int index, NODE* headElementOfSLL){
 		oneBeforeTargetNode->nextNode = targetNode->nextNode;
 
 		//after that we can delete
-		
-	}	
+
+	}
 	return newHead;
 
 }
@@ -71,52 +71,15 @@ void PrintSLL(NODE* head) {
 	*/
 	printf("\nSLL from head to tail:\n");
 	NODE* currentNode = head;
-	while(currentNode != NULL){
+	while (currentNode != NULL) {
 		printf("%d\t", currentNode->data.data);
 		currentNode = currentNode->nextNode;
 	}
 	printf("End of SLL");
 }
 
-NODE* CheckLoop(NODE* head) {
-	
-	int elementWasBefore = 0;//control variable, flag
-	NODE* currentNode = head;
-	NODE* controlNode;
-	int index = 0;
-	int i;
-	if (head->nextNode == NULL) {
 
-	}
-	else {
-		while (currentNode != NULL) {
-
-			//checking
-			controlNode = head;
-			//comparing with all node before
-			for (i = 0; i < index; i++) {
-				if (currentNode == controlNode) {
-					elementWasBefore = 1;
-				}
-				controlNode = controlNode->nextNode;
-			}
-
-			if (elementWasBefore == 0) {
-				currentNode = currentNode->nextNode;
-			}
-			else {
-				//return node whicih show element from behind 
-				return currentNode;
-			}
-			currentNode = currentNode->nextNode;
-			index++;
-		}
-	}
-	//if everything is OK
-	return head;
-}
-
-NODE* DeleteSLL(NODE *head) {
+NODE* DeleteSLL(NODE* head) {
 	NODE* current = head;
 	NODE* next;
 	while (current != NULL) {
@@ -125,4 +88,30 @@ NODE* DeleteSLL(NODE *head) {
 		current = next;
 	}
 	return current;
+}
+
+void DivideSLL(NODE* head, NODE** aSLL, NODE** bSLL) {
+	NODE* currentNode=head;
+	int index = 0;
+
+	while (currentNode != NULL) {
+		if (index == 0) {
+			//init aSLL
+			*aSLL = SLLInit(currentNode->data);
+		}
+		else if (index == 1) {
+			//init bSLL
+			*bSLL = SLLInit(currentNode->data);
+		}
+		else if (index % 2 == 0) {
+			//add to aSLLL
+			*aSLL = AddElementInSLL(currentNode->data, *aSLL);
+		}
+		else if (index % 2 == 1) {
+			//add to bSLL
+			*bSLL = AddElementInSLL(currentNode->data, *bSLL);
+		}
+		index++;
+		currentNode = currentNode->nextNode;
+	}
 }
