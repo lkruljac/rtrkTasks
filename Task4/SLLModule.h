@@ -25,6 +25,6 @@ __declspec(dllexport) NODE* DeleteElementInSLL(int index, NODE* headElementOfSLL
 
 __declspec(dllexport) void PrintSLL(NODE* head);
 
-__declspec(dllexport) void DivideByvalueSLL(NODE *head, NODE **aSLL, NODE **bSLL, DATA compareValue);
+__declspec(dllexport) NODE* InvertSLL(NODE *head);
 
 __declspec(dllexport) NODE* DeleteSLL(NODE* head);

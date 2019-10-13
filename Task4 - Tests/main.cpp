@@ -28,14 +28,10 @@ int main() {
 	PrintSLL(head);
 
 	//Test Divide function
-	NODE* aSLL;
-	NODE* bSLL;
-	DATA myCompareElement;
-	myCompareElement.data = 5;
-	DivideByvalueSLL(head, &aSLL, &bSLL, myCompareElement);
-	printf("\nDivided");
-	PrintSLL(aSLL);
-	PrintSLL(bSLL);
+	NODE* invertedSLL;
+	invertedSLL = InvertSLL(head);
+	printf("\nInverted");
+	PrintSLL(invertedSLL);
 
 	//Test DeleteSLL function
 	printf("\nDeleted SSL");

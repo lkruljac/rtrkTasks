@@ -90,27 +90,26 @@ __declspec(dllexport) NODE* DeleteSLL(NODE* head) {
 	return current;
 }
 
-__declspec(dllexport) void DivideByvalueSLL(NODE* head, NODE** aSLL, NODE** bSLL, DATA compareValue) {
-	NODE* currentNode = head;
-	*aSLL = NULL;
-	*bSLL = NULL;
-	while (currentNode != NULL) {
-		if (currentNode->data.data < compareValue.data) {
-			if (*aSLL == NULL) {
-				*aSLL = SLLInit(currentNode->data);
-			}
-			else {
-				*aSLL = AddElementInSLL(currentNode->data, *aSLL);
-			}
-		}
-		else {
-			if (*bSLL == NULL) {
-				*bSLL = SLLInit(currentNode->data);
-			}
-			else {
-				*bSLL = AddElementInSLL(currentNode->data, *bSLL);
-			}
-		}
-			currentNode = currentNode->nextNode;
+__declspec(dllexport) NODE* InvertSLL(NODE* head) 
+{
+	// no need to reverse if head is nullptr 
+	// or there is only 1 node.
+	if (head == NULL || head->nextNode == nullptr) {
+		return head;
 	}
+
+	NODE* list_to_do = head->nextNode;
+
+	NODE* reversedList = head;
+	reversedList->nextNode = nullptr;
+
+	while (list_to_do != nullptr) {
+		NODE* temp = list_to_do;
+		list_to_do = list_to_do->nextNode;
+
+		temp->nextNode = reversedList;
+		reversedList = temp;
+	}
+
+	return reversedList;
 }

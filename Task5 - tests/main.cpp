@@ -1,4 +1,4 @@
-#include"SLLModule.h"
+#include"DLLModule.h"
 #include<stdio.h>
 #include<conio.h>
 
@@ -9,38 +9,30 @@ int main() {
 
 	//Testing Init function
 	printf("Added first element: %d", myFirstElement.data);
-	head = SLLInit(myFirstElement);
-	PrintSLL(head);
+	head = DLLInit(myFirstElement);
+	PrintDLL(head);
 
 	//Testing AddElement function
 	int i;
 	DATA element;
 	for (i = 1; i < 11; i++) {
 		element.data = i;
-		head = AddElementInSLL(element, head);
+		head = AddElementInDLL(element, head);
 	}
-	PrintSLL(head);
+	PrintDLL(head);
 
 	//Test DeleteElement function
 	int index = 3;
 	printf("\nDeleted element on index: %d", index);
-	head = DeleteElementInSLL(index, head);
-	PrintSLL(head);
+	head = DeleteElementInDLL(index, head);
+	PrintDLL(head);
 
 	//Test Divide function
-	NODE* aSLL;
-	NODE* bSLL;
-	DATA myCompareElement;
-	myCompareElement.data = 5;
-	DivideByvalueSLL(head, &aSLL, &bSLL, myCompareElement);
-	printf("\nDivided");
-	PrintSLL(aSLL);
-	PrintSLL(bSLL);
 
 	//Test DeleteSLL function
 	printf("\nDeleted SSL");
-	head = DeleteSLL(head);
-	PrintSLL(head);
+	head = DeleteDLL(head);
+	PrintDLL(head);
 
 
 	printf("\n###\n###\nUser press any key to exit...");
