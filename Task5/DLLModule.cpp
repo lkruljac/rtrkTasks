@@ -83,42 +83,66 @@ __declspec(dllexport) void PrintDLL(NODE* head) {
 	printf("End of DLL");
 }
 
-__declspec(dllexport) NODE* CheckLoop(NODE* head) {
-
-	int elementWasBefore = 0;//control variable, flag
-	NODE* currentNode = head;
-	NODE* controlNode;
-	int index = 0;
+NODE* getDLLElementByIndex(NODE* head, int index) {
 	int i;
-	if (head->nextNode == NULL) {
-
+	NODE* currentNode = head;
+	for (i = 0; i < index; i++) {
+		currentNode = currentNode->nextNode;
 	}
-	else {
-		while (currentNode != NULL) {
+	return currentNode;
+}
 
-			//checking
-			controlNode = head;
-			//comparing with all node before
-			for (i = 0; i < index; i++) {
-				if (currentNode == controlNode) {
-					elementWasBefore = 1;
-				}
-				controlNode = controlNode->nextNode;
-			}
 
-			if (elementWasBefore == 0) {
-				currentNode = currentNode->nextNode;
-			}
-			else {
-				//return node whicih show element from behind 
-				return currentNode;
-			}
-			currentNode = currentNode->nextNode;
-			index++;
-		}
+int getDLLLenght(NODE* head) {
+	int len = 0;
+	NODE* currentNode = head;
+	while (currentNode != NULL) {
+		currentNode = currentNode->nextNode;
+		len++;
 	}
-	//if everything is OK
-	return head;
+	return len;
+}
+
+NODE* InvertDLL(NODE* head)
+{
+	// no need to reverse if head is nullptr 
+	// or there is only 1 node.
+	if (head == NULL || head->nextNode == nullptr) {
+		return head;
+	}
+
+	NODE* list_to_do = head->nextNode;
+
+	NODE* reversedList = head;
+	reversedList->nextNode = nullptr;
+
+	while (list_to_do != nullptr) {
+		NODE* temp = list_to_do;
+		list_to_do = list_to_do->nextNode;
+
+		temp->nextNode = reversedList;
+		reversedList = temp;
+	}
+
+	return reversedList;
+}
+
+__declspec(dllexport) NODE* getDLLFromMiddle(NODE* head) {
+	NODE* newDLL;
+	int len = getDLLLenght(head);
+	int midd = len / 2;
+	newDLL = DLLInit(getDLLElementByIndex(head, midd)->data);
+	
+	int i;
+	for (i = 1; i < midd; i++) {
+		newDLL = AddElementInDLL(getDLLElementByIndex(head, midd - i)->data, newDLL);
+		newDLL = AddElementInDLL(getDLLElementByIndex(head, midd + i)->data, newDLL);
+	}
+	if (len % 2 == 0) {
+		newDLL = AddElementInDLL(getDLLElementByIndex(head, 0)->data, newDLL);
+	}
+	newDLL = InvertDLL(newDLL);
+	return newDLL;
 }
 
 __declspec(dllexport) NODE* DeleteDLL(NODE* head) {

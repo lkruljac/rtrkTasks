@@ -26,6 +26,6 @@ __declspec(dllexport) NODE* DeleteElementInDLL(int index, NODE* headElementOfSLL
 
 __declspec(dllexport) void PrintDLL(NODE* head);
 
-__declspec(dllexport) NODE* CheckLoop(NODE* head);
+__declspec(dllexport) NODE* getDLLFromMiddle(NODE* head);
 
 __declspec(dllexport) NODE* DeleteDLL(NODE* head);

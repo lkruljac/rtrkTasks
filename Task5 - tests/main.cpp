@@ -27,12 +27,11 @@ int main() {
 	head = DeleteElementInDLL(index, head);
 	PrintDLL(head);
 
-	//Test Divide function
-
-	//Test DeleteSLL function
-	printf("\nDeleted SSL");
-	head = DeleteDLL(head);
-	PrintDLL(head);
+	//Test fromMidd function
+	NODE* newDLL;
+	newDLL = getDLLFromMiddle(head);
+	printf("\nfrom middle DLL");
+	PrintDLL(newDLL);
 
 
 	printf("\n###\n###\nUser press any key to exit...");
